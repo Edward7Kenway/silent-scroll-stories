@@ -134,8 +134,28 @@ export default {
 						boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)'
 					},
 					'50%': {
-						boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)'
+						boxShadow: '0 0 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(147, 51, 234, 0.4)'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-20px)'
+					}
+				},
+				'noise': {
+					'0%, 100%': { transform: 'translate(0, 0)' },
+					'10%': { transform: 'translate(-5%, -5%)' },
+					'20%': { transform: 'translate(-10%, 5%)' },
+					'30%': { transform: 'translate(5%, -10%)' },
+					'40%': { transform: 'translate(-5%, 15%)' },
+					'50%': { transform: 'translate(-10%, 5%)' },
+					'60%': { transform: 'translate(15%, 0%)' },
+					'70%': { transform: 'translate(0%, 15%)' },
+					'80%': { transform: 'translate(-15%, 10%)' },
+					'90%': { transform: 'translate(10%, 5%)' }
 				}
 			},
 			animation: {
@@ -145,9 +165,14 @@ export default {
 				'slide-in-left': 'slide-in-left 0.6s ease-out forwards',
 				'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
 				'scale-in': 'scale-in 0.6s ease-out forwards',
-				'glow-pulse': 'glow-pulse 2s ease-in-out infinite'
+				'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'noise': 'noise 8s infinite linear'
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require('tailwind-scrollbar')({ nocompatible: true })
+	],
 } satisfies Config;
