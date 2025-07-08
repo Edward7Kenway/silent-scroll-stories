@@ -300,7 +300,7 @@ All colors MUST be HSL.
   }
   
   .light .glass-strong {
-    @apply bg-black/8 border-black/15;
+    @apply bg-black/20 border-black/15;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
   }
 
