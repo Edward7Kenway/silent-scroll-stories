@@ -1,32 +1,35 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, ChevronDown } from 'lucide-react';
+import AnimatedTextCycle from './AnimatedTextCycle';
 
 const Hero = () => {
-  const [typedText, setTypedText] = useState('');
-  const fullText = 'Problem Solver';
-
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 150);
-
-    return () => clearInterval(timer);
-  }, []);
+  const roles = [
+    'Full Stack Developer',
+    'React Developer', 
+    'Frontend Specialist',
+    'UI/UX Developer',
+    'JavaScript Expert'
+  ];
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 -z-10">
         {/* Animated Grid */}
-        <div className="absolute inset-0 opacity-20">
+        <motion.div 
+          className="absolute inset-0 opacity-20"
+          animate={{ 
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear"
+          }}
+        >
           <div 
             className="w-full h-full"
             style={{
@@ -37,10 +40,10 @@ const Hero = () => {
               backgroundSize: '100px 100px',
             }}
           />
-        </div>
+        </motion.div>
 
         {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-purple-500/30 rounded-full"
@@ -50,6 +53,7 @@ const Hero = () => {
             }}
             animate={{
               y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
               opacity: [0.3, 0.8, 0.3],
               scale: [1, 1.2, 1],
             }}
@@ -57,7 +61,6 @@ const Hero = () => {
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
-              ease: "easeInOut"
             }}
           />
         ))}
@@ -74,7 +77,6 @@ const Hero = () => {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
           }}
         />
         <motion.div 
@@ -88,7 +90,6 @@ const Hero = () => {
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut",
             delay: 2
           }}
         />
@@ -98,7 +99,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1 }}
           className="space-y-12"
         >
           <motion.div
@@ -122,12 +123,7 @@ const Hero = () => {
               transition={{ duration: 1.2, delay: 0.5 }}
             >
               <span className="relative text-gradient bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                {typedText}
-                <motion.span
-                  className="inline-block w-1 h-20 bg-purple-400 ml-2"
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
+                <AnimatedTextCycle texts={roles} />
                 <motion.div
                   className="absolute -inset-8 bg-gradient-to-r from-purple-500/20 via-violet-500/20 to-indigo-500/20 rounded-3xl blur-3xl -z-10"
                   animate={{ 
@@ -137,7 +133,6 @@ const Hero = () => {
                   transition={{
                     duration: 4,
                     repeat: Infinity,
-                    ease: "easeInOut"
                   }}
                 />
               </span>
@@ -198,7 +193,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Scroll Indicator */}
+      {/* Enhanced Scroll Indicator with Animation */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
         initial={{ opacity: 0, y: 30 }}
@@ -214,8 +209,15 @@ const Hero = () => {
           Scroll Down
         </motion.div>
         <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ 
+            y: [0, 15, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
           className="p-3 glass rounded-full hover:glow-purple transition-all duration-300"
         >
           <ChevronDown className="w-6 h-6 text-purple-400" />

@@ -10,42 +10,48 @@ const Timeline = () => {
       title: 'Network Engineer',
       company: 'NTT Data, Gurugram, India',
       type: 'work',
-      icon: Briefcase
+      icon: Briefcase,
+      description: 'Leading network infrastructure projects and implementing scalable solutions.'
     },
     {
       year: '2019 – 2023',
       title: 'B.Tech - CSE',
       company: '8.3 CGPA, SMS Lucknow',
       type: 'education',
-      icon: GraduationCap
+      icon: GraduationCap,
+      description: 'Focused on computer science fundamentals and modern web technologies.'
     },
     {
       year: '2022',
       title: 'Hacktoberfest 2022',
       company: 'Open Source Contributor',
       type: 'achievement',
-      icon: Award
+      icon: Award,
+      description: 'Contributed to multiple open source projects and earned recognition.'
     },
     {
       year: '2021',
       title: 'Hacktoberfest 2021',
       company: 'Open Source Contributor',
       type: 'achievement',
-      icon: Award
+      icon: Award,
+      description: 'Successfully completed first Hacktoberfest challenge.'
     },
     {
       year: '2021',
       title: 'LetsGrowMore',
       company: 'Open Source Contributor (June–August)',
       type: 'internship',
-      icon: Code
+      icon: Code,
+      description: 'Worked on web development projects and gained practical experience.'
     },
     {
       year: '2021',
       title: 'NeoDocto Web Development',
       company: 'Internship',
       type: 'internship',
-      icon: Code
+      icon: Code,
+      description: 'Built responsive web applications using modern frameworks.'
     }
   ];
 
@@ -56,6 +62,27 @@ const Timeline = () => {
       case 'achievement': return 'from-purple-500 to-purple-600';
       case 'internship': return 'from-orange-500 to-orange-600';
       default: return 'from-gray-500 to-gray-600';
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8
+      }
     }
   };
 
@@ -77,13 +104,19 @@ const Timeline = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline Line */}
+        <motion.div 
+          className="relative"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {/* Connecting Timeline Line */}
           <motion.div 
             className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 opacity-30"
             initial={{ height: 0 }}
             whileInView={{ height: '100%' }}
-            transition={{ duration: 2, ease: "easeInOut" }}
+            transition={{ duration: 2, delay: 0.5 }}
             viewport={{ once: true }}
           />
           
@@ -92,16 +125,13 @@ const Timeline = () => {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
+                variants={itemVariants}
                 className="relative flex items-start mb-16 group"
               >
                 {/* Timeline Dot with Icon */}
                 <motion.div 
                   className={`absolute left-4 w-8 h-8 bg-gradient-to-r ${getTypeColor(item.type)} rounded-full border-4 border-background shadow-lg flex items-center justify-center z-10`}
-                  whileHover={{ scale: 1.2 }}
+                  whileHover={{ scale: 1.3 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <IconComponent className="w-4 h-4 text-white" />
@@ -113,7 +143,7 @@ const Timeline = () => {
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                     <div className="mb-4 lg:mb-0">
                       <motion.h3 
                         className="text-2xl font-semibold text-gradient mb-2"
@@ -136,11 +166,16 @@ const Timeline = () => {
                       {item.year}
                     </motion.span>
                   </div>
+                  {item.description && (
+                    <p className="text-foreground/60 leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
                 </motion.div>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

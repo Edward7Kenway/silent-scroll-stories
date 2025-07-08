@@ -8,8 +8,9 @@ import ProjectCard from '../components/ProjectCard';
 import ProjectFilters from '../components/ProjectFilters';
 import Timeline from '../components/Timeline';
 import ScrollIndicator from '../components/ScrollIndicator';
+import Toast from '../components/Toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, MapPin, Github, Twitter, Send, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Github, Twitter, Instagram, Send, CheckCircle } from 'lucide-react';
 import { useContactForm } from '../hooks/useContactForm';
 
 const Index = () => {
@@ -31,7 +32,8 @@ const Index = () => {
       technologies: ["React", "Firebase", "Tailwind CSS", "Framer Motion", "Chart.js"],
       githubUrl: "https://github.com/username/crypto-market",
       liveUrl: "https://crypto-market-demo.com",
-      category: "Fullstack"
+      category: "Fullstack",
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop"
     },
     {
       title: "Modern Glass Todo",
@@ -39,7 +41,8 @@ const Index = () => {
       technologies: ["React", "Tailwind CSS", "Framer Motion", "LocalStorage", "React Hot Toast"],
       githubUrl: "https://github.com/username/glass-todo",
       liveUrl: "https://glass-todo-demo.com",
-      category: "React"
+      category: "React",
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop"
     },
     {
       title: "Mesho App",
@@ -47,7 +50,8 @@ const Index = () => {
       technologies: ["React", "Context API", "Styled Components", "Stripe"],
       githubUrl: "https://github.com/username/mesho-app",
       liveUrl: "https://mesho-app-demo.com",
-      category: "Fullstack"
+      category: "Fullstack",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop"
     },
     {
       title: "Q-trip",
@@ -55,7 +59,8 @@ const Index = () => {
       technologies: ["React", "Bootstrap", "JavaScript", "Mapbox"],
       githubUrl: "https://github.com/username/q-trip",
       liveUrl: "https://q-trip-demo.com",
-      category: "React"
+      category: "React",
+      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop"
     }
   ];
 
@@ -70,9 +75,11 @@ const Index = () => {
     errors,
     isSubmitting,
     isSubmitted,
+    showToast,
     handleChange,
     handleSubmit,
-    setIsSubmitted
+    setIsSubmitted,
+    setShowToast
   } = useContactForm();
 
   return (
@@ -80,6 +87,12 @@ const Index = () => {
       <div className="min-h-screen dark">
         <Navigation />
         <ScrollIndicator />
+        <Toast 
+          show={showToast} 
+          onClose={() => setShowToast(false)}
+          message="Message sent successfully! I'll get back to you soon 🚀"
+        />
+        
         <Hero />
         <About />
         
@@ -123,6 +136,7 @@ const Index = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ y: -10 }}
+                    className="min-h-[500px]"
                   >
                     <ProjectCard {...project} />
                   </motion.div>
@@ -222,6 +236,16 @@ const Index = () => {
                     >
                       <Twitter className="w-8 h-8 group-hover/social:text-purple-400 transition-colors duration-300" />
                     </motion.a>
+                    <motion.a
+                      href="https://instagram.com"
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-4 glass rounded-xl hover:glow-purple transition-all duration-300 group/social"
+                      whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Instagram className="w-8 h-8 group-hover/social:text-purple-400 transition-colors duration-300" />
+                    </motion.a>
                   </div>
                 </motion.div>
               </motion.div>
@@ -271,43 +295,49 @@ const Index = () => {
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Your Name"
-                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 text-lg ${
-                              errors.name ? 'border-red-500/50' : 'border-white/10'
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 text-lg ${
+                              errors.name ? 'border-red-500/50 focus:ring-red-500/50' : 'border-white/10'
                             }`}
                             whileFocus={{ scale: 1.02 }}
                           />
-                          {errors.name && (
-                            <motion.p
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="text-red-400 text-sm mt-2 ml-2"
-                            >
-                              {errors.name}
-                            </motion.p>
-                          )}
+                          <AnimatePresence>
+                            {errors.name && (
+                              <motion.p
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="text-red-400 text-sm mt-2 ml-2"
+                              >
+                                {errors.name}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
                         </motion.div>
                         
                         <motion.div className="group">
                           <motion.input
                             type="email"
-                            name="email"
+                            name="email" 
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="your.email@example.com"
-                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 text-lg ${
-                              errors.email ? 'border-red-500/50' : 'border-white/10'
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 text-lg ${
+                              errors.email ? 'border-red-500/50 focus:ring-red-500/50' : 'border-white/10'
                             }`}
                             whileFocus={{ scale: 1.02 }}
                           />
-                          {errors.email && (
-                            <motion.p
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="text-red-400 text-sm mt-2 ml-2"
-                            >
-                              {errors.email}
-                            </motion.p>
-                          )}
+                          <AnimatePresence>
+                            {errors.email && (
+                              <motion.p
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="text-red-400 text-sm mt-2 ml-2"
+                              >
+                                {errors.email}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
                         </motion.div>
                         
                         <motion.div className="group">
@@ -317,26 +347,29 @@ const Index = () => {
                             value={formData.message}
                             onChange={handleChange}
                             placeholder="Tell me about your project..."
-                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 resize-none text-lg ${
-                              errors.message ? 'border-red-500/50' : 'border-white/10'
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 resize-none text-lg ${
+                              errors.message ? 'border-red-500/50 focus:ring-red-500/50' : 'border-white/10'
                             }`}
                             whileFocus={{ scale: 1.02 }}
                           />
-                          {errors.message && (
-                            <motion.p
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="text-red-400 text-sm mt-2 ml-2"
-                            >
-                              {errors.message}
-                            </motion.p>
-                          )}
+                          <AnimatePresence>
+                            {errors.message && (
+                              <motion.p
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="text-red-400 text-sm mt-2 ml-2"
+                              >
+                                {errors.message}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
                         </motion.div>
                         
                         <motion.button
                           type="submit"
                           disabled={isSubmitting}
-                          className={`w-full py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 group relative overflow-hidden text-lg flex items-center justify-center gap-3 ${
+                          className={`relative w-full py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 group overflow-hidden text-lg flex items-center justify-center gap-3 ${
                             isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                           }`}
                           whileHover={!isSubmitting ? { 
@@ -372,6 +405,13 @@ const Index = () => {
                               </motion.span>
                             )}
                           </AnimatePresence>
+                          
+                          {/* Ripple effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-white/20 scale-0 rounded-xl"
+                            whileTap={{ scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                          />
                         </motion.button>
                       </>
                     )}
@@ -415,7 +455,7 @@ const Index = () => {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                © 2025 Aman Maurya. All rights reserved.
+                © 2025 Aman Maurya. Built with React & Tailwind CSS.
               </motion.div>
             </motion.div>
           </div>

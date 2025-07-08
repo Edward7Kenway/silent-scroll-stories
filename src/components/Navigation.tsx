@@ -8,6 +8,7 @@ import ThemeToggle from './ThemeToggle';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
 
   const navItems = [
@@ -21,7 +22,24 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Determine active section based on scroll position
+      const sections = navItems.map(item => ({
+        id: item.href.substring(1),
+        element: document.querySelector(item.href)
+      }));
+      
+      const currentSection = sections.find(section => {
+        if (!section.element) return false;
+        const rect = section.element.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      });
+      
+      if (currentSection) {
+        setActiveSection(currentSection.id);
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -44,7 +62,7 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8 }}
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         scrolled ? 'glass-strong py-4 shadow-2xl border-b border-purple-500/20' : 'py-6'
       }`}
@@ -66,30 +84,43 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative"
-              >
-                <a
-                  href={item.href}
-                  onClick={(e) => handleSmoothScroll(e, item.href)}
-                  className="relative px-6 py-3 rounded-xl transition-all duration-300 text-foreground/80 hover:text-primary group"
+            {navItems.map((item, index) => {
+              const isActive = activeSection === item.href.substring(1);
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative"
                 >
-                  {item.name}
-                  <motion.span 
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    whileHover={{ scale: 1.05 }}
-                  />
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-full"
-                  />
-                </a>
-              </motion.div>
-            ))}
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleSmoothScroll(e, item.href)}
+                    className={`relative px-6 py-3 rounded-xl transition-all duration-300 group ${
+                      isActive 
+                        ? 'text-primary bg-purple-500/10' 
+                        : 'text-foreground/80 hover:text-primary'
+                    }`}
+                  >
+                    {item.name}
+                    <motion.span 
+                      className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                        isActive 
+                          ? 'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 opacity-100' 
+                          : 'bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100'
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                    />
+                    <motion.div
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-transform duration-300 origin-center ${
+                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      }`}
+                    />
+                  </a>
+                </motion.div>
+              );
+            })}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -143,28 +174,37 @@ const Navigation = () => {
               initial={{ opacity: 0, height: 0, y: -20 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.4 }}
               className="md:hidden mt-6 glass-strong rounded-2xl p-6 overflow-hidden"
             >
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    handleSmoothScroll(e, item.href);
-                    setIsOpen(false);
-                  }}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="block py-4 px-6 rounded-xl transition-all duration-300 text-foreground/80 hover:text-primary hover:bg-purple-500/10 relative group"
-                >
-                  {item.name}
-                  <motion.div
-                    className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-r"
-                  />
-                </motion.a>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = activeSection === item.href.substring(1);
+                return (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      handleSmoothScroll(e, item.href);
+                      setIsOpen(false);
+                    }}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className={`block py-4 px-6 rounded-xl transition-all duration-300 relative group ${
+                      isActive 
+                        ? 'text-primary bg-purple-500/10' 
+                        : 'text-foreground/80 hover:text-primary hover:bg-purple-500/10'
+                    }`}
+                  >
+                    {item.name}
+                    <motion.div
+                      className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-r transition-transform duration-300 origin-top ${
+                        isActive ? 'scale-y-100' : 'scale-y-0 group-hover:scale-y-100'
+                      }`}
+                    />
+                  </motion.a>
+                );
+              })}
             </motion.div>
           )}
         </AnimatePresence>
