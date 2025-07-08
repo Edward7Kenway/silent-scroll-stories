@@ -62,42 +62,45 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? 'glass-strong py-4 shadow-2xl border-b border-purple-500/20' : 'py-6'
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'glass-strong py-3 shadow-2xl border-b border-purple-500/20' : 'py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             className="relative group"
           >
-            <Link to="/" className="text-2xl font-bold text-gradient relative z-10">
+            <Link to="/" className="text-xl font-bold text-gradient relative z-10 flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                AM
+              </div>
               Aman.Maurya
             </Link>
             <motion.div
-              className="absolute -inset-3 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              className="absolute -inset-2 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               whileHover={{ opacity: 1 }}
             />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.substring(1);
               return (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
                   className="relative"
                 >
                   <a
                     href={item.href}
                     onClick={(e) => handleSmoothScroll(e, item.href)}
-                    className={`relative px-6 py-3 rounded-xl transition-all duration-300 group ${
+                    className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
                       isActive 
                         ? 'text-primary bg-purple-500/10' 
                         : 'text-foreground/80 hover:text-primary'
@@ -105,12 +108,12 @@ const Navigation = () => {
                   >
                     {item.name}
                     <motion.span 
-                      className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                      className={`absolute inset-0 rounded-lg transition-opacity duration-300 ${
                         isActive 
-                          ? 'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 opacity-100' 
+                          ? 'bg-gradient-to-r from-purple-500/15 to-indigo-500/15 opacity-100' 
                           : 'bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100'
                       }`}
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ scale: 1.02 }}
                     />
                     <motion.div
                       className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-transform duration-300 origin-center ${
@@ -122,21 +125,21 @@ const Navigation = () => {
               );
             })}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="ml-6"
+              transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
+              className="ml-4"
             >
               <ThemeToggle />
             </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-3">
             <ThemeToggle />
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-3 rounded-xl glass-strong hover:glow-purple transition-all duration-300"
+              className="p-2 rounded-lg glass-strong hover:glow-purple transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -147,9 +150,9 @@ const Navigation = () => {
                     initial={{ rotate: -90, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
                     exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -157,9 +160,9 @@ const Navigation = () => {
                     initial={{ rotate: 90, opacity: 0 }}
                     animate={{ rotate: 0, opacity: 1 }}
                     exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <Menu className="w-6 h-6" />
+                    <Menu className="w-5 h-5" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -171,11 +174,11 @@ const Navigation = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0, y: -20 }}
+              initial={{ opacity: 0, height: 0, y: -10 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="md:hidden mt-6 glass-strong rounded-2xl p-6 overflow-hidden"
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="md:hidden mt-4 glass-strong rounded-xl p-4 overflow-hidden"
             >
               {navItems.map((item, index) => {
                 const isActive = activeSection === item.href.substring(1);
@@ -187,10 +190,10 @@ const Navigation = () => {
                       handleSmoothScroll(e, item.href);
                       setIsOpen(false);
                     }}
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className={`block py-4 px-6 rounded-xl transition-all duration-300 relative group ${
+                    transition={{ duration: 0.3, delay: index * 0.1, ease: "easeOut" }}
+                    className={`block py-3 px-4 rounded-lg transition-all duration-300 relative group ${
                       isActive 
                         ? 'text-primary bg-purple-500/10' 
                         : 'text-foreground/80 hover:text-primary hover:bg-purple-500/10'
