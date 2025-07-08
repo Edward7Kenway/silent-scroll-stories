@@ -42,25 +42,26 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* Floating Particles */}
-        {[...Array(25)].map((_, i) => (
+        {/* Enhanced Floating Particles */}
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-purple-500/30 rounded-full"
+            className="absolute w-1 h-1 bg-purple-400/40 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.2, 1],
+              y: [0, -40, 0],
+              x: [0, Math.random() * 30 - 15, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [0.5, 1.5, 0.5],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 3,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
             }}
           />
         ))}
@@ -100,7 +101,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="space-y-12"
+          className="space-y-8"
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -117,15 +118,15 @@ const Hero = () => {
             </motion.p>
             
             <motion.h1 
-              className="text-7xl md:text-9xl font-bold leading-tight relative mb-8"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight relative mb-2 tracking-tight"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.5 }}
             >
-              <span className="relative text-gradient bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="relative text-gradient bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-600 dark:from-purple-400 dark:via-violet-400 dark:to-indigo-400 bg-clip-text text-transparent [text-shadow:_0_2px_10px_rgb(147_51_234_/_20%)]">
                 <AnimatedTextCycle texts={roles} />
                 <motion.div
-                  className="absolute -inset-8 bg-gradient-to-r from-purple-500/20 via-violet-500/20 to-indigo-500/20 rounded-3xl blur-3xl -z-10"
+                  className="absolute -inset-4 bg-gradient-to-r from-purple-500/20 via-violet-500/20 to-indigo-500/20 rounded-3xl blur-3xl -z-10"
                   animate={{ 
                     opacity: [0.3, 0.8, 0.3],
                     scale: [1, 1.05, 1]
@@ -140,7 +141,7 @@ const Hero = () => {
           </motion.div>
           
           <motion.p 
-            className="text-xl md:text-2xl text-foreground/80 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed mt-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -150,7 +151,7 @@ const Hero = () => {
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-12"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
@@ -160,7 +161,7 @@ const Hero = () => {
               className="group relative px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-500"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 40px rgba(147, 51, 234, 0.5)"
+                boxShadow: "0 0 40px rgba(147, 51, 234, 0.6), 0 0 80px rgba(147, 51, 234, 0.3)"
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -177,10 +178,10 @@ const Hero = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-10 py-5 glass-strong rounded-2xl font-semibold hover:glow-purple transition-all duration-500"
+              className="group px-10 py-5 glass-strong rounded-2xl font-semibold transition-all duration-500"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 30px rgba(147, 51, 234, 0.3)"
+                boxShadow: "0 0 30px rgba(147, 51, 234, 0.4), 0 0 60px rgba(147, 51, 234, 0.2)"
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -193,7 +194,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Scroll Indicator with Animation */}
+      {/* Enhanced Animated Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
         initial={{ opacity: 0, y: 30 }}
@@ -210,15 +211,16 @@ const Hero = () => {
         </motion.div>
         <motion.div
           animate={{ 
-            y: [0, 15, 0],
+            y: [0, 8, 0],
             scale: [1, 1.1, 1]
           }}
           transition={{ 
             duration: 2, 
             repeat: Infinity,
-            repeatType: "reverse"
+            ease: "easeInOut"
           }}
           className="p-3 glass rounded-full hover:glow-purple transition-all duration-300"
+          whileHover={{ scale: 1.2 }}
         >
           <ChevronDown className="w-6 h-6 text-purple-400" />
         </motion.div>

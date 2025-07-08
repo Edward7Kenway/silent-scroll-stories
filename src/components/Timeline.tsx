@@ -70,18 +70,18 @@ const Timeline = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: -50 },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.8
+        duration: 0.6
       }
     }
   };
@@ -111,9 +111,9 @@ const Timeline = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* Connecting Timeline Line */}
+          {/* Enhanced Connecting Timeline Line */}
           <motion.div 
-            className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 opacity-30"
+            className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 opacity-40"
             initial={{ height: 0 }}
             whileInView={{ height: '100%' }}
             transition={{ duration: 2, delay: 0.5 }}
@@ -126,48 +126,48 @@ const Timeline = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative flex items-start mb-16 group"
+                className="relative flex items-start mb-12 group space-y-6"
               >
-                {/* Timeline Dot with Icon */}
+                {/* Enhanced Timeline Dot with Icon */}
                 <motion.div 
-                  className={`absolute left-4 w-8 h-8 bg-gradient-to-r ${getTypeColor(item.type)} rounded-full border-4 border-background shadow-lg flex items-center justify-center z-10`}
+                  className={`absolute left-4 w-8 h-8 bg-gradient-to-r ${getTypeColor(item.type)} rounded-full border-4 border-background shadow-xl flex items-center justify-center z-10`}
                   whileHover={{ scale: 1.3 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <IconComponent className="w-4 h-4 text-white" />
                 </motion.div>
                 
-                {/* Content Card */}
+                {/* Enhanced Content Card */}
                 <motion.div 
-                  className="ml-20 glass-strong p-8 rounded-3xl hover:glow-purple transition-all duration-500 w-full"
+                  className="ml-20 glass-strong p-6 md:p-8 rounded-3xl hover:glow-purple transition-all duration-500 w-full shadow-lg"
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                    <div className="mb-4 lg:mb-0">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 gap-4">
+                    <div className="flex-1">
                       <motion.h3 
                         className="text-2xl font-semibold text-gradient mb-2"
                         whileHover={{ scale: 1.05 }}
                       >
                         {item.title}
                       </motion.h3>
-                      <p className="text-foreground/70 text-lg mb-2">{item.company}</p>
+                      <p className="text-foreground/70 text-lg mb-3">{item.company}</p>
                       <motion.div
-                        className={`inline-block px-3 py-1 text-xs font-medium bg-gradient-to-r ${getTypeColor(item.type)} text-white rounded-full`}
+                        className={`inline-block px-4 py-2 text-xs font-medium bg-gradient-to-r ${getTypeColor(item.type)} text-white rounded-full shadow-md`}
                         whileHover={{ scale: 1.1 }}
                       >
                         {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
                       </motion.div>
                     </div>
                     <motion.span 
-                      className="text-sm px-4 py-2 glass rounded-full text-foreground/60 shrink-0 font-medium"
+                      className="text-sm px-4 py-2 glass rounded-full text-foreground/60 shrink-0 font-medium border border-purple-500/20"
                       whileHover={{ scale: 1.05, backgroundColor: 'rgba(147, 51, 234, 0.1)' }}
                     >
                       {item.year}
                     </motion.span>
                   </div>
                   {item.description && (
-                    <p className="text-foreground/60 leading-relaxed">
+                    <p className="text-foreground/60 leading-relaxed text-base">
                       {item.description}
                     </p>
                   )}

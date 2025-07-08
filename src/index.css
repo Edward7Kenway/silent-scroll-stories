@@ -293,18 +293,30 @@ All colors MUST be HSL.
     }
   }
 
-  /* Light mode adjustments */
+  /* Enhanced Light mode adjustments */
   .light .glass {
     @apply bg-black/5 border-black/10;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
   
   .light .glass-strong {
-    @apply bg-black/10 border-black/20;
+    @apply bg-black/8 border-black/15;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .light .glow-purple {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.3), 0 0 60px rgba(99, 102, 241, 0.2);
   }
 
   .light .noise::before {
     background-image: 
       radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0);
+  }
+
+  /* Enhanced text gradient for light mode */
+  .light .text-gradient {
+    @apply bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent;
+    text-shadow: 0 2px 10px rgba(147, 51, 234, 0.1);
   }
 }
 

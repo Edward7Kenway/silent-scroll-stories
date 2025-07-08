@@ -13,7 +13,7 @@ const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % texts.length);
-    }, 3000);
+    }, 3500); // Slower transition for better readability
 
     return () => clearInterval(interval);
   }, [texts.length]);
@@ -23,10 +23,13 @@ const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className 
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
-          initial={{ opacity: 0, y: 20, rotateX: -90 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          exit={{ opacity: 0, y: -20, rotateX: 90 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -30, scale: 0.9 }}
+          transition={{ 
+            duration: 0.5, 
+            ease: [0.25, 0.46, 0.45, 0.94] // Custom cubic-bezier for smooth easing
+          }}
           className="inline-block"
         >
           {texts[currentIndex]}
