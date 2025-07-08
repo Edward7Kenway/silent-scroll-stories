@@ -1,53 +1,79 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import ProjectCard from '../components/ProjectCard';
+import ProjectFilters from '../components/ProjectFilters';
 import Timeline from '../components/Timeline';
 import ScrollIndicator from '../components/ScrollIndicator';
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Github, Twitter } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, MapPin, Github, Twitter, Send, CheckCircle } from 'lucide-react';
+import { useContactForm } from '../hooks/useContactForm';
 
 const Index = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  
   const projects = [
     {
       title: "Portfolio",
-      description: "A modern portfolio built with React and Next.js",
-      technologies: ["React", "Next.js", "Tailwind CSS"],
+      description: "A modern portfolio built with React and Next.js featuring glassmorphism design and smooth animations",
+      technologies: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
       githubUrl: "https://github.com/username/portfolio",
-      liveUrl: "https://portfolio-demo.com"
+      liveUrl: "https://portfolio-demo.com",
+      category: "React",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
     },
     {
       title: "Crypto Market",
-      description: "Crypto dashboard with graph",
-      technologies: ["React", "Firebase", "Tailwind CSS", "Framer Motion"],
+      description: "Real-time cryptocurrency dashboard with interactive charts and portfolio tracking",
+      technologies: ["React", "Firebase", "Tailwind CSS", "Framer Motion", "Chart.js"],
       githubUrl: "https://github.com/username/crypto-market",
-      liveUrl: "https://crypto-market-demo.com"
+      liveUrl: "https://crypto-market-demo.com",
+      category: "Fullstack"
     },
     {
       title: "Modern Glass Todo",
-      description: "A sleek, glassmorphism-style todo app with filters, toast, localStorage",
+      description: "A sleek, glassmorphism-style todo app with filters, animations, and local storage",
       technologies: ["React", "Tailwind CSS", "Framer Motion", "LocalStorage", "React Hot Toast"],
       githubUrl: "https://github.com/username/glass-todo",
-      liveUrl: "https://glass-todo-demo.com"
+      liveUrl: "https://glass-todo-demo.com",
+      category: "React"
     },
     {
       title: "Mesho App",
-      description: "E-commerce platform with cart",
-      technologies: ["React", "Context API", "Styled Components"],
+      description: "E-commerce platform with shopping cart, product filters, and payment integration",
+      technologies: ["React", "Context API", "Styled Components", "Stripe"],
       githubUrl: "https://github.com/username/mesho-app",
-      liveUrl: "https://mesho-app-demo.com"
+      liveUrl: "https://mesho-app-demo.com",
+      category: "Fullstack"
     },
     {
       title: "Q-trip",
-      description: "Travel booking app with filters",
-      technologies: ["React", "Bootstrap", "JavaScript"],
+      description: "Travel booking application with destination filters and interactive maps",
+      technologies: ["React", "Bootstrap", "JavaScript", "Mapbox"],
       githubUrl: "https://github.com/username/q-trip",
-      liveUrl: "https://q-trip-demo.com"
+      liveUrl: "https://q-trip-demo.com",
+      category: "React"
     }
   ];
+
+  const categories = ['All', 'React', 'Fullstack', 'Design'];
+  
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
+
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    isSubmitted,
+    handleChange,
+    handleSubmit,
+    setIsSubmitted
+  } = useContactForm();
 
   return (
     <ThemeProvider>
@@ -57,7 +83,7 @@ const Index = () => {
         <Hero />
         <About />
         
-        {/* Projects Section */}
+        {/* Enhanced Projects Section */}
         <section id="projects" className="py-32 px-6 relative">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -75,27 +101,40 @@ const Index = () => {
               </p>
             </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 80 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.15 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -15, scale: 1.03 }}
-                  className="group"
-                >
-                  <ProjectCard {...project} />
-                </motion.div>
-              ))}
-            </div>
+            <ProjectFilters
+              categories={categories}
+              activeCategory={activeFilter}
+              onCategoryChange={setActiveFilter}
+            />
+            
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeFilter}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+              >
+                {filteredProjects.map((project, index) => (
+                  <motion.div
+                    key={`${activeFilter}-${index}`}
+                    initial={{ opacity: 0, y: 80, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -10 }}
+                  >
+                    <ProjectCard {...project} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </section>
 
         <Timeline />
         
-        {/* Contact Section */}
+        {/* Enhanced Contact Section */}
         <section id="contact" className="py-32 px-6 relative">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -114,7 +153,7 @@ const Index = () => {
               </p>
             </motion.div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <motion.div
                 initial={{ opacity: 0, x: -80 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -123,27 +162,38 @@ const Index = () => {
                 className="space-y-8"
               >
                 <motion.div 
-                  className="glass-strong p-10 rounded-3xl hover:glow-purple transition-all duration-500 group"
+                  className="glass-strong p-10 rounded-3xl hover:glow-purple transition-all duration-500"
                   whileHover={{ scale: 1.02, rotateY: 2 }}
                 >
                   <h3 className="text-3xl font-semibold text-gradient mb-8">Get in Touch</h3>
                   <div className="space-y-6">
                     <motion.a
                       href="mailto:aman7work@gmail.com"
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 10, scale: 1.02 }}
                       className="flex items-center gap-4 p-4 rounded-xl hover:bg-purple-500/10 transition-all duration-300 group/item"
                     >
-                      <Mail className="text-3xl text-purple-400 group-hover/item:scale-110 transition-transform duration-300" />
+                      <motion.div
+                        className="p-3 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl"
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                      >
+                        <Mail className="w-6 h-6 text-purple-400" />
+                      </motion.div>
                       <div>
                         <h4 className="font-semibold mb-1 text-lg">Email</h4>
                         <p className="text-foreground/70">aman7work@gmail.com</p>
                       </div>
                     </motion.a>
+                    
                     <motion.div
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 10, scale: 1.02 }}
                       className="flex items-center gap-4 p-4 rounded-xl hover:bg-purple-500/10 transition-all duration-300 group/item"
                     >
-                      <MapPin className="text-3xl text-purple-400 group-hover/item:scale-110 transition-transform duration-300" />
+                      <motion.div
+                        className="p-3 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl"
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                      >
+                        <MapPin className="w-6 h-6 text-purple-400" />
+                      </motion.div>
                       <div>
                         <h4 className="font-semibold mb-1 text-lg">Location</h4>
                         <p className="text-foreground/70">Delhi, India</p>
@@ -157,7 +207,7 @@ const Index = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-4 glass rounded-xl hover:glow-purple transition-all duration-300 group/social"
-                      whileHover={{ scale: 1.1, y: -5 }}
+                      whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Github className="w-8 h-8 group-hover/social:text-purple-400 transition-colors duration-300" />
@@ -167,7 +217,7 @@ const Index = () => {
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="p-4 glass rounded-xl hover:glow-purple transition-all duration-300 group/social"
-                      whileHover={{ scale: 1.1, y: -5 }}
+                      whileHover={{ scale: 1.1, y: -5, rotate: -5 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Twitter className="w-8 h-8 group-hover/social:text-purple-400 transition-colors duration-300" />
@@ -183,47 +233,149 @@ const Index = () => {
                 viewport={{ once: true }}
               >
                 <motion.form 
+                  onSubmit={handleSubmit}
                   className="glass-strong p-10 rounded-3xl space-y-8 hover:glow-purple transition-all duration-500"
                   whileHover={{ scale: 1.02, rotateY: -2 }}
                 >
-                  <motion.div className="group">
-                    <motion.input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 text-lg"
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                  </motion.div>
-                  <motion.div className="group">
-                    <motion.input
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 text-lg"
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                  </motion.div>
-                  <motion.div className="group">
-                    <motion.textarea
-                      rows={6}
-                      placeholder="Tell me about your project..."
-                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 resize-none text-lg"
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                  </motion.div>
-                  <motion.button
-                    type="submit"
-                    className="w-full py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 group relative overflow-hidden text-lg"
-                    whileHover={{ 
-                      scale: 1.02,
-                      boxShadow: "0 0 40px rgba(147, 51, 234, 0.5)"
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span className="relative z-10">Send Message</span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                  </motion.button>
+                  <AnimatePresence mode="wait">
+                    {isSubmitted ? (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="text-center py-12"
+                      >
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                          className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4"
+                        >
+                          <CheckCircle className="w-8 h-8 text-green-400" />
+                        </motion.div>
+                        <h3 className="text-2xl font-semibold text-gradient mb-2">Message Sent!</h3>
+                        <p className="text-foreground/70 mb-6">Thanks! I'll get back to you soon 🚀</p>
+                        <motion.button
+                          onClick={() => setIsSubmitted(false)}
+                          className="px-6 py-2 glass rounded-xl hover:glow-purple transition-all duration-300"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          Send Another
+                        </motion.button>
+                      </motion.div>
+                    ) : (
+                      <>
+                        <motion.div className="group">
+                          <motion.input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Your Name"
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 text-lg ${
+                              errors.name ? 'border-red-500/50' : 'border-white/10'
+                            }`}
+                            whileFocus={{ scale: 1.02 }}
+                          />
+                          {errors.name && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-red-400 text-sm mt-2 ml-2"
+                            >
+                              {errors.name}
+                            </motion.p>
+                          )}
+                        </motion.div>
+                        
+                        <motion.div className="group">
+                          <motion.input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="your.email@example.com"
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 text-lg ${
+                              errors.email ? 'border-red-500/50' : 'border-white/10'
+                            }`}
+                            whileFocus={{ scale: 1.02 }}
+                          />
+                          {errors.email && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-red-400 text-sm mt-2 ml-2"
+                            >
+                              {errors.email}
+                            </motion.p>
+                          )}
+                        </motion.div>
+                        
+                        <motion.div className="group">
+                          <motion.textarea
+                            rows={6}
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            placeholder="Tell me about your project..."
+                            className={`w-full px-6 py-4 bg-white/5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 resize-none text-lg ${
+                              errors.message ? 'border-red-500/50' : 'border-white/10'
+                            }`}
+                            whileFocus={{ scale: 1.02 }}
+                          />
+                          {errors.message && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-red-400 text-sm mt-2 ml-2"
+                            >
+                              {errors.message}
+                            </motion.p>
+                          )}
+                        </motion.div>
+                        
+                        <motion.button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`w-full py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 group relative overflow-hidden text-lg flex items-center justify-center gap-3 ${
+                            isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                          }`}
+                          whileHover={!isSubmitting ? { 
+                            scale: 1.02,
+                            boxShadow: "0 0 40px rgba(147, 51, 234, 0.5)"
+                          } : {}}
+                          whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                        >
+                          <AnimatePresence mode="wait">
+                            {isSubmitting ? (
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex items-center gap-3"
+                              >
+                                <motion.div
+                                  animate={{ rotate: 360 }}
+                                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                  className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                                />
+                                Sending...
+                              </motion.div>
+                            ) : (
+                              <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex items-center gap-3"
+                              >
+                                <Send className="w-5 h-5" />
+                                Send Message
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </motion.button>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </motion.form>
               </motion.div>
             </div>

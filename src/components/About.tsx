@@ -1,13 +1,38 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Code, Database, Globe, Zap } from 'lucide-react';
 
 const About = () => {
-  const skills = [
-    ['React', 'Next.js', 'Tailwind CSS', 'Firebase'],
-    ['Framer Motion', 'LocalStorage', 'React Hot Toast'],
-    ['Context API', 'Styled Components', 'Bootstrap', 'JavaScript']
+  const techStack = [
+    { name: 'Frontend', icon: Code, skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
+    { name: 'Backend', icon: Database, skills: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB'] },
+    { name: 'Tools', icon: Globe, skills: ['Git', 'Docker', 'AWS', 'Figma'] },
+    { name: 'Animation', icon: Zap, skills: ['Framer Motion', 'GSAP', 'CSS Animations'] }
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
     <section id="about" className="py-32 px-6 relative">
@@ -17,62 +42,61 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold mb-8">
             About <span className="text-gradient">Me</span>
           </h2>
+          <p className="text-xl text-foreground/70 max-w-4xl mx-auto leading-relaxed">
+            I'm a passionate full-stack developer who loves creating exceptional digital experiences. 
+            With a strong foundation in modern web technologies, I focus on building performant, 
+            accessible, and visually stunning applications that users love to interact with.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div className="glass p-8 rounded-2xl hover:glow transition-all duration-500">
-              <p className="text-xl text-foreground/80 leading-relaxed">
-                I craft performant, accessible, and beautiful digital experiences using modern web technologies. 
-                Here's my current tech stack:
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            {skills.map((skillGroup, groupIndex) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {techStack.map((category, index) => {
+            const IconComponent = category.icon;
+            return (
               <motion.div
-                key={groupIndex}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + groupIndex * 0.2 }}
-                viewport={{ once: true }}
-                className="flex flex-wrap gap-3"
+                key={index}
+                variants={itemVariants}
+                className="glass-strong p-8 rounded-3xl hover:glow-purple transition-all duration-500 group"
+                whileHover={{ scale: 1.05, y: -10 }}
               >
-                {skillGroup.map((skill, skillIndex) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.8 + groupIndex * 0.2 + skillIndex * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.1 }}
-                    className="px-4 py-2 glass rounded-full text-sm font-medium hover:glass-strong transition-all duration-300 cursor-default"
+                <div className="text-center">
+                  <motion.div
+                    className="w-16 h-16 mx-auto mb-6 p-4 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-2xl group-hover:from-purple-500/30 group-hover:to-indigo-500/30 transition-all duration-300"
+                    whileHover={{ rotate: 10, scale: 1.1 }}
                   >
-                    {skill}
-                  </motion.span>
-                ))}
+                    <IconComponent className="w-full h-full text-purple-400" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-gradient mb-4">{category.name}</h3>
+                  <div className="space-y-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.div
+                        key={skillIndex}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * skillIndex, duration: 0.5 }}
+                        viewport={{ once: true }}
+                        className="text-sm text-foreground/70 px-3 py-1 glass rounded-full hover:text-purple-400 transition-colors duration-300"
+                      >
+                        {skill}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
