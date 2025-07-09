@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, Code } from 'lucide-react';
 
 const Timeline = () => {
   const timelineData = [
@@ -10,7 +9,7 @@ const Timeline = () => {
       title: 'Network Engineer',
       company: 'NTT Data, Gurugram, India',
       type: 'work',
-      icon: Briefcase,
+      icon: '💼',
       description: 'Leading network infrastructure projects and implementing scalable solutions.'
     },
     {
@@ -18,7 +17,7 @@ const Timeline = () => {
       title: 'B.Tech - CSE',
       company: '8.3 CGPA, SMS Lucknow',
       type: 'education',
-      icon: GraduationCap,
+      icon: '🎓',
       description: 'Focused on computer science fundamentals and modern web technologies.'
     },
     {
@@ -26,7 +25,7 @@ const Timeline = () => {
       title: 'Hacktoberfest 2022',
       company: 'Open Source Contributor',
       type: 'achievement',
-      icon: Award,
+      icon: '🏆',
       description: 'Contributed to multiple open source projects and earned recognition.'
     },
     {
@@ -34,7 +33,7 @@ const Timeline = () => {
       title: 'Hacktoberfest 2021',
       company: 'Open Source Contributor',
       type: 'achievement',
-      icon: Award,
+      icon: '🏆',
       description: 'Successfully completed first Hacktoberfest challenge.'
     },
     {
@@ -42,7 +41,7 @@ const Timeline = () => {
       title: 'LetsGrowMore',
       company: 'Open Source Contributor (June–August)',
       type: 'internship',
-      icon: Code,
+      icon: '💻',
       description: 'Worked on web development projects and gained practical experience.'
     },
     {
@@ -50,7 +49,7 @@ const Timeline = () => {
       title: 'NeoDocto Web Development',
       company: 'Internship',
       type: 'internship',
-      icon: Code,
+      icon: '💻',
       description: 'Built responsive web applications using modern frameworks.'
     }
   ];
@@ -87,7 +86,7 @@ const Timeline = () => {
   };
 
   return (
-    <section id="timeline" className="py-32 px-6 relative">
+    <section id="timeline" className="py-20 px-6 relative">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -113,7 +112,7 @@ const Timeline = () => {
         >
           {/* Enhanced Connecting Timeline Line */}
           <motion.div 
-            className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 opacity-40"
+            className="absolute left-10 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 opacity-60"
             initial={{ height: 0 }}
             whileInView={{ height: '100%' }}
             transition={{ duration: 2, delay: 0.5 }}
@@ -121,25 +120,24 @@ const Timeline = () => {
           />
           
           {timelineData.map((item, index) => {
-            const IconComponent = item.icon;
             return (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative flex items-start mb-12 group space-y-6"
+                className="relative flex items-start mb-10 group"
               >
-                {/* Enhanced Timeline Dot with Icon */}
+                {/* Enhanced Timeline Dot with Emoji Icon */}
                 <motion.div 
-                  className={`absolute left-4 w-8 h-8 bg-gradient-to-r ${getTypeColor(item.type)} rounded-full border-4 border-background shadow-xl flex items-center justify-center z-10`}
-                  whileHover={{ scale: 1.3 }}
+                  className={`absolute left-4 w-12 h-12 bg-gradient-to-r ${getTypeColor(item.type)} rounded-full border-4 border-background shadow-xl flex items-center justify-center z-10`}
+                  whileHover={{ scale: 1.2, rotate: 10 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <IconComponent className="w-4 h-4 text-white" />
+                  <span className="text-xl">{item.icon}</span>
                 </motion.div>
                 
                 {/* Enhanced Content Card */}
                 <motion.div 
-                  className="ml-20 glass-strong p-6 md:p-8 rounded-3xl hover:glow-purple transition-all duration-500 w-full shadow-lg"
+                  className="ml-24 glass-strong p-6 md:p-8 rounded-3xl hover:glow-purple transition-all duration-500 w-full shadow-lg"
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                 >

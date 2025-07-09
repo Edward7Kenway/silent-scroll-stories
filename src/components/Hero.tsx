@@ -14,7 +14,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+    <section id="home" className="min-h-[90vh] flex items-center justify-center px-6 pt-16 pb-12 relative overflow-hidden">
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 -z-10">
         {/* Animated Grid */}
@@ -120,55 +120,43 @@ const Hero = () => {
             </motion.p>
             
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight relative mb-4 tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight relative mb-6 tracking-tight"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             >
-              <span className="relative text-gradient bg-gradient-to-r from-purple-500 via-violet-400 to-indigo-500 dark:from-purple-300 dark:via-violet-300 dark:to-indigo-300 bg-clip-text text-transparent [text-shadow:_0_4px_16px_rgb(147_51_234_/_40%)]">
+              <span className="relative text-gradient bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-600 dark:from-purple-400 dark:via-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
                 <AnimatedTextCycle texts={roles} />
-                <motion.div
-                  className="absolute -inset-6 bg-gradient-to-r from-purple-400/20 via-violet-400/20 to-indigo-400/20 rounded-3xl blur-2xl -z-10"
-                  animate={{ 
-                    opacity: [0.4, 0.7, 0.4],
-                    scale: [1, 1.03, 1]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
               </span>
             </motion.h1>
           </motion.div>
           
           <motion.p 
-            className="text-lg md:text-xl text-foreground/85 max-w-4xl mx-auto leading-relaxed mt-2"
+            className="text-lg md:text-xl text-foreground/85 max-w-4xl mx-auto leading-relaxed mb-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
           >
             I craft accessible digital experiences with modern web technologies. 
             Passionate about performant, accessible, and visually stunning apps.
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
           >
             <motion.a
               href="#projects"
-              className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 will-change-transform"
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 will-change-transform glow-purple"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 30px rgba(147, 51, 234, 0.5), 0 0 60px rgba(147, 51, 234, 0.3)"
+                boxShadow: "0 0 30px rgba(147, 51, 234, 0.6), 0 0 60px rgba(147, 51, 234, 0.4)"
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10 flex items-center gap-2 text-base">
+              <span className="relative z-10 flex items-center gap-2 text-base font-medium">
                 View My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
@@ -181,10 +169,10 @@ const Hero = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 glass-strong rounded-2xl font-semibold transition-all duration-300 will-change-transform"
+              className="group px-8 py-4 glass-strong rounded-2xl font-medium transition-all duration-300 will-change-transform hover:glow-purple"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 20px rgba(147, 51, 234, 0.3), 0 0 40px rgba(147, 51, 234, 0.2)"
+                boxShadow: "0 0 20px rgba(147, 51, 234, 0.4), 0 0 40px rgba(147, 51, 234, 0.3)"
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -199,31 +187,31 @@ const Hero = () => {
 
       {/* Enhanced Animated Scroll Indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1, ease: "easeOut" }}
+        transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
         onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
       >
         <motion.div
-          className="text-xs text-foreground/70 mb-2 font-medium tracking-wider uppercase"
-          animate={{ opacity: [0.6, 1, 0.6] }}
+          className="text-xs text-foreground/60 mb-3 font-medium tracking-wider uppercase"
+          animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           Scroll Down
         </motion.div>
         <motion.div
           animate={{ 
-            y: [0, 6, 0],
-            scale: [1, 1.05, 1]
+            y: [0, 8, 0],
+            scale: [1, 1.1, 1]
           }}
           transition={{ 
-            duration: 1.5, 
+            duration: 1.2, 
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="p-2 glass rounded-full hover:glow-purple transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
+          className="p-3 glass rounded-full hover:glow-purple transition-all duration-300"
+          whileHover={{ scale: 1.15 }}
         >
           <ChevronDown className="w-5 h-5 text-purple-400" />
         </motion.div>

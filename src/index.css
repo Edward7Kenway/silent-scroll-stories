@@ -78,13 +78,8 @@ All colors MUST be HSL.
   
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
   }
 
-  /* Scroll snap for sections */
-  section {
-    scroll-snap-align: start;
-  }
 
   /* Custom Grid Background */
   .grid-bg {
@@ -326,6 +321,18 @@ All colors MUST be HSL.
 
   .will-change-opacity {
     will-change: opacity;
+  }
+
+  /* Scroll progress indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--progress-width, 0%);
+    height: 3px;
+    background: linear-gradient(90deg, #9333ea, #6366f1, #8b5cf6);
+    z-index: 1000;
+    transition: width 0.1s ease;
   }
 
   /* Accessibility improvements */

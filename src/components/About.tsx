@@ -1,54 +1,25 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Globe, Zap } from 'lucide-react';
 
 const About = () => {
   const techStack = [
-    {
-      category: 'Frontend',
-      icon: Code,
-      color: 'from-blue-500 to-cyan-500',
-      skills: [
-        { name: 'React', logo: '⚛️' },
-        { name: 'Next.js', logo: '▲' },
-        { name: 'TypeScript', logo: 'TS' },
-        { name: 'Tailwind', logo: '🎨' }
-      ]
-    },
-    {
-      category: 'Backend',
-      icon: Database,
-      color: 'from-green-500 to-emerald-500',
-      skills: [
-        { name: 'Node.js', logo: '🟢' },
-        { name: 'Python', logo: '🐍' },
-        { name: 'PostgreSQL', logo: '🐘' },
-        { name: 'MongoDB', logo: '🍃' }
-      ]
-    },
-    {
-      category: 'Tools',
-      icon: Globe,
-      color: 'from-orange-500 to-red-500',
-      skills: [
-        { name: 'Git', logo: '📝' },
-        { name: 'Docker', logo: '🐳' },
-        { name: 'AWS', logo: '☁️' },
-        { name: 'Figma', logo: '🎯' }
-      ]
-    },
-    {
-      category: 'Animation',
-      icon: Zap,
-      color: 'from-purple-500 to-pink-500',
-      skills: [
-        { name: 'Framer Motion', logo: '🎬' },
-        { name: 'GSAP', logo: '⚡' },
-        { name: 'CSS Animations', logo: '💫' },
-        { name: 'Three.js', logo: '🎲' }
-      ]
-    }
+    { name: 'React', logo: '⚛️', color: 'from-blue-400 to-blue-600' },
+    { name: 'Next.js', logo: '▲', color: 'from-gray-700 to-gray-900' },
+    { name: 'TypeScript', logo: 'TS', color: 'from-blue-500 to-blue-700' },
+    { name: 'Tailwind', logo: '🎨', color: 'from-cyan-400 to-cyan-600' },
+    { name: 'Node.js', logo: '🟢', color: 'from-green-500 to-green-700' },
+    { name: 'Python', logo: '🐍', color: 'from-yellow-400 to-yellow-600' },
+    { name: 'PostgreSQL', logo: '🐘', color: 'from-blue-600 to-indigo-600' },
+    { name: 'MongoDB', logo: '🍃', color: 'from-green-400 to-emerald-600' },
+    { name: 'Git', logo: '📝', color: 'from-orange-400 to-orange-600' },
+    { name: 'Docker', logo: '🐳', color: 'from-blue-400 to-blue-600' },
+    { name: 'AWS', logo: '☁️', color: 'from-orange-300 to-orange-500' },
+    { name: 'Figma', logo: '🎯', color: 'from-purple-400 to-purple-600' },
+    { name: 'Framer Motion', logo: '🎬', color: 'from-pink-400 to-pink-600' },
+    { name: 'GSAP', logo: '⚡', color: 'from-green-400 to-green-600' },
+    { name: 'CSS3', logo: '💫', color: 'from-blue-400 to-blue-600' },
+    { name: 'Three.js', logo: '🎲', color: 'from-indigo-400 to-indigo-600' }
   ];
 
   const containerVariants = {
@@ -64,33 +35,28 @@ const About = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+    visible: { opacity: 1, y: 0 }
   };
 
   const skillVariants = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
+    visible: { opacity: 1, scale: 1 }
   };
 
   return (
-    <section id="about" className="py-24 px-6 relative">
-      {/* Background noise effect */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="w-full h-full noise" />
+    <section id="about" className="py-20 px-6 relative">
+      {/* Grid background */}
+      <div className="absolute inset-0 opacity-10">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(147, 51, 234, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(147, 51, 234, 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -99,16 +65,26 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             About <span className="text-gradient">Me</span>
           </h2>
-          <p className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed mb-8">
             I'm a passionate full-stack developer who loves creating exceptional digital experiences. 
             With a strong foundation in modern web technologies, I focus on building performant, 
             accessible, and visually stunning applications that users love to interact with.
           </p>
+          
+          <motion.h3 
+            className="text-xl font-semibold text-gradient mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            Here's my current stack
+          </motion.h3>
         </motion.div>
 
         <motion.div
@@ -116,52 +92,35 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4"
         >
-          {techStack.map((category, index) => {
-            const IconComponent = category.icon;
-            return (
+          {techStack.map((tech, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group relative flex flex-col items-center p-4 glass rounded-2xl hover:glow-purple transition-all duration-300 will-change-transform cursor-default"
+              whileHover={{ scale: 1.05, y: -5 }}
+              title={tech.name}
+            >
               <motion.div
-                key={index}
-                variants={itemVariants}
-                className="glass-strong p-6 rounded-2xl hover:glow-purple transition-all duration-300 group will-change-transform"
-                whileHover={{ scale: 1.03, y: -5 }}
+                className={`w-12 h-12 mb-3 p-2 bg-gradient-to-br ${tech.color} rounded-xl group-hover:scale-110 transition-all duration-300 will-change-transform flex items-center justify-center`}
+                whileHover={{ rotate: 10, scale: 1.2 }}
               >
-                <div className="text-center">
-                  <motion.div
-                    className={`w-14 h-14 mx-auto mb-5 p-3 bg-gradient-to-br ${category.color} bg-opacity-20 rounded-xl group-hover:scale-110 transition-all duration-300 will-change-transform`}
-                    whileHover={{ rotate: 5, scale: 1.15 }}
-                  >
-                    <IconComponent className="w-full h-full text-white" />
-                  </motion.div>
-                  
-                  <h3 className="text-lg font-semibold text-gradient mb-4">{category.category}</h3>
-                  
-                  <motion.div 
-                    className="grid grid-cols-2 gap-2"
-                    variants={containerVariants}
-                  >
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skillIndex}
-                        variants={skillVariants}
-                        className="flex flex-col items-center p-2 glass rounded-lg hover:glow-purple transition-all duration-300 group/skill will-change-transform"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        title={skill.name}
-                      >
-                        <span className="text-xl mb-1 group-hover/skill:scale-110 transition-transform duration-300">
-                          {skill.logo}
-                        </span>
-                        <span className="text-xs text-foreground/75 font-medium text-center leading-tight">
-                          {skill.name}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </div>
+                <span className="text-2xl filter drop-shadow-sm">
+                  {tech.logo}
+                </span>
               </motion.div>
-            );
-          })}
+              
+              <span className="text-xs text-foreground/75 font-medium text-center leading-tight group-hover:text-foreground transition-colors duration-300">
+                {tech.name}
+              </span>
+              
+              {/* Hover glow effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+              />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
