@@ -158,7 +158,7 @@ const Hero = () => {
             >
               <span className="relative z-10 flex items-center gap-2 text-base font-medium">
                 View My Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
               </span>
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -177,7 +177,7 @@ const Hero = () => {
               whileTap={{ scale: 0.98 }}
             >
               <span className="flex items-center gap-2 text-base">
-                <Download className="w-4 h-4" />
+                <Download className="w-4 h-4" aria-hidden="true" />
                 Resume
               </span>
             </motion.a>
@@ -213,7 +213,7 @@ const Hero = () => {
           className="p-3 glass rounded-full hover:glow-purple transition-all duration-300"
           whileHover={{ scale: 1.15 }}
         >
-          <ChevronDown className="w-5 h-5 text-purple-400" />
+          <ChevronDown className="w-5 h-5 text-purple-400" aria-hidden="true" />
         </motion.div>
       </motion.div>
     </section>

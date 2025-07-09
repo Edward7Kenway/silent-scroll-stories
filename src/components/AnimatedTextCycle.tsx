@@ -13,7 +13,7 @@ const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % texts.length);
-    }, 2500); // Faster transition
+    }, 2000); // Optimized timing
 
     return () => clearInterval(interval);
   }, [texts.length]);

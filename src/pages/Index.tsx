@@ -2,20 +2,20 @@
 import React from 'react';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navigation from '../components/Navigation';
+import ScrollProgress from '../components/ScrollProgress';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import FeaturedProjects from '../components/FeaturedProjects';
 import Timeline from '../components/Timeline';
 import ContactSection from '../components/ContactSection';
-import ScrollIndicator from '../components/ScrollIndicator';
 import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
     <ThemeProvider>
       <div className="min-h-screen dark">
+        <ScrollProgress />
         <Navigation />
-        <ScrollIndicator />
         
         <Hero />
         <About />
