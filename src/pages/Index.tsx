@@ -6,8 +6,8 @@ import ScrollProgress from '../components/ScrollProgress';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import FeaturedProjects from '../components/FeaturedProjects';
-import Timeline from '../components/Timeline';
-import ContactSection from '../components/ContactSection';
+import VerticalTimeline from '../components/VerticalTimeline';
+import ContactForm from '../components/ContactForm';
 import { motion } from 'framer-motion';
 
 const Index = () => {
@@ -20,8 +20,8 @@ const Index = () => {
         <Hero />
         <About />
         <FeaturedProjects />
-        <Timeline />
-        <ContactSection />
+        <VerticalTimeline />
+        <ContactForm />
 
         {/* Enhanced Footer */}
         <footer className="py-16 px-6 border-t border-purple-500/20 relative">

@@ -160,6 +160,8 @@ All colors MUST be HSL.
   
   .text-gradient {
     @apply bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent;
+    text-shadow: none;
+    filter: none;
   }
   
   .glow {
@@ -311,7 +313,16 @@ All colors MUST be HSL.
   /* Enhanced text gradient for light mode */
   .light .text-gradient {
     @apply bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 bg-clip-text text-transparent;
-    text-shadow: 0 2px 8px rgba(147, 51, 234, 0.1);
+    text-shadow: none;
+    filter: none;
+  }
+
+  /* Line clamp utility */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* Performance optimizations */

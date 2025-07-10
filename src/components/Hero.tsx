@@ -125,7 +125,7 @@ const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             >
-              <span className="relative text-gradient bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-600 dark:from-purple-400 dark:via-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
+              <span className="relative font-bold bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-600 dark:from-purple-300 dark:via-violet-300 dark:to-indigo-300 bg-clip-text text-transparent [text-shadow:none] will-change-transform">
                 <AnimatedTextCycle texts={roles} />
               </span>
             </motion.h1>

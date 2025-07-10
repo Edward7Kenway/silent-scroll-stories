@@ -91,17 +91,16 @@ const FeaturedProjects = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={`${activeFilter}-${index}`}
-                initial={{ opacity: 0, y: 80, scale: 0.9 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="min-h-[500px]"
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="h-full"
               >
                 <ProjectCard {...project} />
               </motion.div>

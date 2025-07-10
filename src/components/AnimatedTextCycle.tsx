@@ -23,14 +23,18 @@ const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className 
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          exit={{ opacity: 0, y: -15, scale: 0.98 }}
           transition={{ 
-            duration: 0.4, 
-            ease: [0.25, 0.46, 0.45, 0.94] // Smoother easing
+            duration: 0.3, 
+            ease: "easeOut"
           }}
-          className="inline-block will-change-transform"
+          className="inline-block will-change-transform font-bold"
+          style={{ 
+            textShadow: 'none',
+            filter: 'none'
+          }}
         >
           {texts[currentIndex]}
         </motion.span>

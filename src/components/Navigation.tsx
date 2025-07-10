@@ -15,7 +15,7 @@ const Navigation = () => {
     { name: 'Home', path: '/', href: '#home' },
     { name: 'About', path: '/', href: '#about' },
     { name: 'Projects', path: '/', href: '#projects' },
-    { name: 'Timeline', path: '/', href: '#timeline' },
+    { name: 'Experience', path: '/', href: '#experience' },
     { name: 'Contact', path: '/', href: '#contact' },
   ];
 
@@ -64,7 +64,7 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass-strong py-3 shadow-2xl border-b border-purple-500/20' : 'py-5'
+        scrolled ? 'glass-strong backdrop-blur-lg py-3 shadow-2xl border-b border-purple-500/20' : 'py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -73,11 +73,12 @@ const Navigation = () => {
             whileHover={{ scale: 1.02 }}
             className="relative group"
           >
-            <Link to="/" className="text-xl font-bold text-gradient relative z-10 flex items-center gap-2">
+            <Link to="/" className="text-xl md:text-2xl font-bold text-gradient relative z-10 flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                 AM
               </div>
-              Aman.Maurya
+              <span className="hidden md:inline">Aman Maurya</span>
+              <span className="md:hidden">Aman.</span>
             </Link>
             <motion.div
               className="absolute -inset-2 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -86,7 +87,7 @@ const Navigation = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -100,21 +101,13 @@ const Navigation = () => {
                   <a
                     href={item.href}
                     onClick={(e) => handleSmoothScroll(e, item.href)}
-                    className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
+                    className={`relative px-4 py-2 transition-all duration-300 group ${
                       isActive 
-                        ? 'text-primary bg-purple-500/10' 
+                        ? 'text-primary' 
                         : 'text-foreground/80 hover:text-primary'
                     }`}
                   >
                     {item.name}
-                    <motion.span 
-                      className={`absolute inset-0 rounded-lg transition-opacity duration-300 ${
-                        isActive 
-                          ? 'bg-gradient-to-r from-purple-500/15 to-indigo-500/15 opacity-100' 
-                          : 'bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100'
-                      }`}
-                      whileHover={{ scale: 1.02 }}
-                    />
                     <motion.div
                       className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-transform duration-300 origin-center ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
