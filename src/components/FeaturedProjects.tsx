@@ -9,49 +9,58 @@ const FeaturedProjects = () => {
   
   const projects = [
     {
-      title: "Portfolio",
-      description: "A modern portfolio built with React and Next.js featuring glassmorphism design and smooth animations",
-      technologies: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
-      githubUrl: "https://github.com/username/portfolio",
-      liveUrl: "https://portfolio-demo.com",
-      category: "React",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
-    },
-    {
-      title: "Crypto Market",
-      description: "Real-time cryptocurrency dashboard with interactive charts and portfolio tracking",
-      technologies: ["React", "Firebase", "Tailwind CSS", "Framer Motion", "Chart.js"],
-      githubUrl: "https://github.com/username/crypto-market",
-      liveUrl: "https://crypto-market-demo.com",
-      category: "Fullstack",
-      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop"
-    },
-    {
-      title: "Modern Glass Todo",
-      description: "A sleek, glassmorphism-style todo app with filters, animations, and local storage",
-      technologies: ["React", "Tailwind CSS", "Framer Motion", "LocalStorage", "React Hot Toast"],
-      githubUrl: "https://github.com/username/glass-todo",
-      liveUrl: "https://glass-todo-demo.com",
-      category: "React",
-      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop"
-    },
-    {
-      title: "Mesho App",
-      description: "E-commerce platform with shopping cart, product filters, and payment integration",
-      technologies: ["React", "Context API", "Styled Components", "Stripe"],
-      githubUrl: "https://github.com/username/mesho-app",
-      liveUrl: "https://mesho-app-demo.com",
+      title: "E-Commerce Platform",
+      description: "Full-stack marketplace with secure payments, user auth, and real-time inventory management",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe", "Express"],
+      githubUrl: "https://github.com/amanmaurya7/ecommerce-platform",
+      liveUrl: "https://ecommerce-demo.vercel.app",
       category: "Fullstack",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop"
     },
     {
-      title: "Q-trip",
-      description: "Travel booking application with destination filters and interactive maps",
-      technologies: ["React", "Bootstrap", "JavaScript", "Mapbox"],
-      githubUrl: "https://github.com/username/q-trip",
-      liveUrl: "https://q-trip-demo.com",
+      title: "Task Management App",
+      description: "Collaborative project management tool with drag-drop boards and team features",
+      technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Framer Motion"],
+      githubUrl: "https://github.com/amanmaurya7/task-manager",
+      liveUrl: "https://taskmanager-demo.vercel.app",
       category: "React",
-      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop"
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop"
+    },
+    {
+      title: "Weather Dashboard",
+      description: "Beautiful weather app with location-based forecasts and interactive maps",
+      technologies: ["React", "JavaScript", "REST APIs", "CSS3"],
+      githubUrl: "https://github.com/amanmaurya7/weather-app",
+      liveUrl: "https://weather-dashboard-demo.vercel.app",
+      category: "React",
+      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop"
+    },
+    {
+      title: "Crypto Portfolio Tracker",
+      description: "Real-time cryptocurrency portfolio with live charts and market analysis",
+      technologies: ["React", "Chart.js", "Firebase", "Tailwind CSS"],
+      githubUrl: "https://github.com/amanmaurya7/crypto-tracker",
+      liveUrl: "https://crypto-portfolio-demo.vercel.app",
+      category: "Fullstack",
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop"
+    },
+    {
+      title: "Social Media Dashboard",
+      description: "Modern social platform with posts, comments, and real-time notifications",
+      technologies: ["React", "Node.js", "Socket.io", "PostgreSQL"],
+      githubUrl: "https://github.com/amanmaurya7/social-dashboard",
+      liveUrl: "https://social-demo.vercel.app",
+      category: "Fullstack",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop"
+    },
+    {
+      title: "Developer Portfolio",
+      description: "Personal portfolio showcasing projects with glassmorphism design and animations",
+      technologies: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
+      githubUrl: "https://github.com/amanmaurya7/portfolio",
+      liveUrl: "https://amanmaurya.dev",
+      category: "React",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
     }
   ];
 
@@ -62,20 +71,20 @@ const FeaturedProjects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-32 px-6 relative">
+    <section id="projects" className="py-20 px-6 relative">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-8">
-            Featured <span className="text-gradient">Projects</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Featured <span className="bg-gradient-to-r from-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Projects</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-            A showcase of my recent work, featuring modern web applications built with cutting-edge technologies
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+            Showcase of modern web applications built with cutting-edge technologies and best practices
           </p>
         </motion.div>
         

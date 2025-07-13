@@ -9,26 +9,33 @@ interface AnimatedTextCycleProps {
 
 const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className = '' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (isHovered) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % texts.length);
-    }, 2000); // Optimized timing
+    }, 3000); // Slower, smoother timing
 
     return () => clearInterval(interval);
-  }, [texts.length]);
+  }, [texts.length, isHovered]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div 
+      className={`relative ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
-          initial={{ opacity: 0, y: 15, scale: 0.98 }}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -15, scale: 0.98 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ 
-            duration: 0.3, 
-            ease: "easeOut"
+            duration: 0.6, 
+            ease: [0.22, 1, 0.36, 1]
           }}
           className="inline-block will-change-transform font-bold tracking-tight"
           style={{ 

@@ -98,7 +98,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto text-center relative z-10">
+      <div className="max-w-7xl mx-auto text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,12 +120,12 @@ const Hero = () => {
             </motion.p>
             
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight relative mb-6 tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight relative mb-8 tracking-tight"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             >
-              <span className="relative font-bold bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-600 dark:from-purple-400 dark:via-violet-400 dark:to-indigo-400 bg-clip-text text-transparent will-change-transform" style={{ textShadow: 'none' }}>
+              <span className="relative font-bold bg-gradient-to-r from-[#a78bfa] via-[#c084fc] to-[#8b5cf6] dark:from-[#a78bfa] dark:via-[#c084fc] dark:to-[#8b5cf6] bg-clip-text text-transparent will-change-transform">
                 <AnimatedTextCycle texts={roles} />
               </span>
             </motion.h1>
@@ -142,17 +142,17 @@ const Hero = () => {
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
           >
             <motion.a
               href="#projects"
-              className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 will-change-transform glow-purple"
+              className="group relative px-8 py-4 bg-gradient-to-r from-[#a78bfa] to-[#c084fc] text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 ease-in-out will-change-transform backdrop-blur-md"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 30px rgba(147, 51, 234, 0.6), 0 0 60px rgba(147, 51, 234, 0.4)"
+                boxShadow: "0 0 25px rgba(167, 139, 250, 0.4), 0 0 50px rgba(167, 139, 250, 0.2)"
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -161,7 +161,7 @@ const Hero = () => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
               </span>
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-0 bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               />
             </motion.a>
             
@@ -169,10 +169,10 @@ const Hero = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 glass-strong rounded-2xl font-medium transition-all duration-300 will-change-transform hover:glow-purple"
+              className="group px-8 py-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl font-medium transition-all duration-300 ease-in-out will-change-transform hover:bg-white/20"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 20px rgba(147, 51, 234, 0.4), 0 0 40px rgba(147, 51, 234, 0.3)"
+                boxShadow: "0 0 20px rgba(167, 139, 250, 0.3), 0 0 40px rgba(167, 139, 250, 0.2)"
               }}
               whileTap={{ scale: 0.98 }}
             >

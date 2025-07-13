@@ -17,55 +17,55 @@ const VerticalTimeline = () => {
     {
       year: "2024",
       title: "Senior Frontend Developer",
-      company: "Tech Innovators Inc.",
+      company: "TechCorp Solutions",
       type: "work",
-      description: "Led the development of scalable React applications, mentored junior developers, and implemented modern web technologies to improve user experience.",
-      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
-      duration: "Jan 2024 - Present"
+      description: "Leading React development for enterprise SaaS platforms. Built scalable component libraries and optimized performance for 10k+ users.",
+      technologies: ["React", "TypeScript", "Redux", "AWS"],
+      duration: "Mar 2024 - Present"
     },
     {
       year: "2023",
       title: "Full Stack Developer",
-      company: "Digital Solutions Ltd.",
+      company: "StartupTech Inc.",
       type: "work", 
-      description: "Developed and maintained full-stack applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+      description: "Built complete web applications from concept to deployment. Developed REST APIs, responsive frontends, and managed cloud infrastructure.",
       technologies: ["React", "Node.js", "MongoDB", "Express"],
-      duration: "Mar 2023 - Dec 2023"
+      duration: "Jun 2023 - Feb 2024"
     },
     {
       year: "2022",
-      title: "React Developer",
-      company: "StartupHub",
+      title: "Frontend Developer",
+      company: "WebFlow Studios",
       type: "work",
-      description: "Built responsive web applications from scratch, integrated RESTful APIs, and optimized performance for better user experience.",
-      technologies: ["React", "JavaScript", "CSS3", "REST APIs"],
-      duration: "Jun 2022 - Feb 2023"
-    },
-    {
-      year: "2022",
-      title: "Bachelor of Computer Science",
-      company: "University of Technology",
-      type: "education",
-      description: "Graduated with honors, specializing in software engineering and web development. Completed multiple projects and internships.",
-      duration: "2018 - 2022"
+      description: "Created responsive user interfaces and collaborated with designers to implement pixel-perfect designs. Improved site performance by 40%.",
+      technologies: ["React", "JavaScript", "Tailwind CSS", "Framer Motion"],
+      duration: "Jan 2022 - May 2023"
     },
     {
       year: "2021",
+      title: "B.Tech Computer Science",
+      company: "National Institute of Technology",
+      type: "education",
+      description: "Graduated with distinction, specializing in software engineering and web technologies. Completed projects in machine learning and full-stack development.",
+      duration: "Aug 2017 - May 2021"
+    },
+    {
+      year: "2020",
       title: "Open Source Contributor",
-      company: "GitHub Community",
+      company: "React Community",
       type: "project",
-      description: "Actively contributed to open source projects, focusing on React components and developer tools. Maintained several popular repositories.",
-      technologies: ["React", "TypeScript", "Jest", "Storybook"],
-      duration: "2021 - Present"
+      description: "Actively contributed to React ecosystem and maintained npm packages. Built developer tools used by 1000+ developers worldwide.",
+      technologies: ["React", "TypeScript", "Jest", "npm"],
+      duration: "2020 - Present"
     },
     {
       year: "2021",
       title: "Hackathon Winner",
-      company: "Code Challenge 2021",
+      company: "TechFest 2021",
       type: "achievement",
-      description: "Won first place in a 48-hour hackathon by developing an innovative web application that solved real-world problems.",
-      technologies: ["React", "Firebase", "API Integration"],
-      duration: "March 2021"
+      description: "Won first place by developing an AI-powered productivity app in 48 hours. Solution now used by local businesses for task management.",
+      technologies: ["React", "Firebase", "Machine Learning", "API Integration"],
+      duration: "November 2021"
     }
   ];
 
@@ -87,15 +87,15 @@ const VerticalTimeline = () => {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'work':
-        return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
       case 'education':
-        return 'bg-green-500/20 text-green-300 border-green-500/30';
+        return 'bg-green-500/10 text-green-400 border-green-500/20';
       case 'project':
-        return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+        return 'bg-[#a78bfa]/10 text-[#a78bfa] border-[#a78bfa]/20';
       case 'achievement':
-        return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+        return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
       default:
-        return 'bg-gray-500/20 text-gray-300 border-gray-500/30';
+        return 'bg-slate-500/10 text-slate-400 border-slate-500/20';
     }
   };
 
@@ -106,29 +106,29 @@ const VerticalTimeline = () => {
       case 'education':
         return 'bg-green-500 border-green-400';
       case 'project':
-        return 'bg-purple-500 border-purple-400';
+        return 'bg-[#a78bfa] border-[#c084fc]';
       case 'achievement':
         return 'bg-yellow-500 border-yellow-400';
       default:
-        return 'bg-gray-500 border-gray-400';
+        return 'bg-slate-500 border-slate-400';
     }
   };
 
   return (
-    <section id="experience" className="py-32 px-6 relative">
+    <section id="experience" className="py-20 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-8">
-            My <span className="text-gradient">Journey</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            My <span className="bg-gradient-to-r from-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Journey</span>
           </h2>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-            A timeline of my professional growth, education, and key achievements in the tech industry
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+            Professional growth, education, and key achievements in the tech industry
           </p>
         </motion.div>
 
@@ -139,7 +139,7 @@ const VerticalTimeline = () => {
             whileInView={{ height: "100%" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             viewport={{ once: true }}
-            className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-1 bg-gradient-to-b from-purple-500 via-indigo-500 to-purple-500 rounded-full"
+            className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-px bg-gradient-to-b from-[#a78bfa]/30 via-[#c084fc]/50 to-[#a78bfa]/30 rounded-full"
             style={{ top: '2rem' }}
           />
 
@@ -181,9 +181,9 @@ const VerticalTimeline = () => {
 
                 {/* Content Card */}
                 <motion.div
-                  className={`glass-strong rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 ml-16 md:ml-0 ${
+                  className={`backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg hover:bg-white/10 hover:border-white/20 hover:shadow-2xl hover:shadow-[#a78bfa]/10 transition-all duration-300 ease-in-out ml-16 md:ml-0 ${
                     index % 2 === 0 ? 'md:mr-16' : 'md:ml-16'
-                  } md:w-5/12 w-full group hover:glow-purple min-h-[280px]`}
+                  } md:w-5/12 w-full group hover:scale-105 min-h-[260px]`}
                   whileHover={{ scale: 1.02, y: -8 }}
                 >
                   {/* Date Badge - Desktop */}
@@ -199,11 +199,11 @@ const VerticalTimeline = () => {
                         <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getTypeColor(item.type)}`}>
                           {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
                         </span>
-                        <span className="text-purple-400 font-semibold text-sm">
+                        <span className="text-[#a78bfa] font-semibold text-sm">
                           {item.year}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold text-gradient">
+                      <h3 className="text-lg font-bold text-foreground group-hover:text-[#a78bfa] transition-colors duration-300">
                         {item.title}
                       </h3>
                       <p className="text-foreground/80 font-medium">
@@ -224,15 +224,15 @@ const VerticalTimeline = () => {
                     {/* Technologies */}
                     {item.technologies && (
                       <div className="flex flex-wrap gap-2">
-                        {item.technologies.map((tech, techIndex) => (
-                          <motion.span
-                            key={techIndex}
-                            className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs border border-purple-500/30"
-                            whileHover={{ scale: 1.05, y: -1 }}
-                          >
-                            {tech}
-                          </motion.span>
-                        ))}
+                         {item.technologies.map((tech, techIndex) => (
+                           <motion.span
+                             key={techIndex}
+                             className="px-2.5 py-1 bg-[#a78bfa]/10 text-[#a78bfa] rounded-lg text-xs border border-[#a78bfa]/20"
+                             whileHover={{ scale: 1.05 }}
+                           >
+                             {tech}
+                           </motion.span>
+                         ))}
                       </div>
                     )}
                   </div>
