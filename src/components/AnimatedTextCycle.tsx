@@ -30,7 +30,7 @@ const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({ texts, className 
             duration: 0.3, 
             ease: "easeOut"
           }}
-          className="inline-block will-change-transform font-bold"
+          className="inline-block will-change-transform font-bold tracking-tight"
           style={{ 
             textShadow: 'none',
             filter: 'none'

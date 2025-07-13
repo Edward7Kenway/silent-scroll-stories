@@ -22,14 +22,14 @@ const ScrollProgress = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 origin-left z-50"
+      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 origin-left z-50 shadow-lg shadow-purple-500/20"
       style={{ 
         scaleX: scrollProgress / 100,
         transformOrigin: '0%'
       }}
       initial={{ scaleX: 0 }}
       animate={{ scaleX: scrollProgress / 100 }}
-      transition={{ duration: 0.1 }}
+      transition={{ duration: 0.1, ease: "easeOut" }}
     />
   );
 };

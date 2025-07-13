@@ -144,7 +144,7 @@ const VerticalTimeline = () => {
           />
 
           {/* Timeline Items */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {timelineData.map((item, index) => (
               <motion.div
                 key={index}
@@ -152,37 +152,44 @@ const VerticalTimeline = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center ${
+                className={`relative flex items-start ${
                   index % 2 === 0 
                     ? 'md:flex-row-reverse md:text-right' 
                     : 'md:flex-row md:text-left'
                 } flex-row text-left`}
               >
-                {/* Year Badge - Mobile */}
-                <div className="md:hidden absolute -left-2 top-8">
+                {/* Timeline Marker */}
+                <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 top-6">
                   <motion.div
-                    className={`w-12 h-12 rounded-full border-4 ${getMarkerColor(item.type)} flex items-center justify-center text-white font-bold text-sm shadow-lg`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    {getIcon(item.type)}
-                  </motion.div>
+                    className={`w-4 h-4 rounded-full ${getMarkerColor(item.type)} shadow-lg z-10 relative`}
+                    whileHover={{ scale: 1.2 }}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  />
+                  <motion.div
+                    className={`absolute inset-0 w-4 h-4 rounded-full ${getMarkerColor(item.type)} animate-ping opacity-75`}
+                  />
+                </div>
+
+                {/* Date Badge - Mobile */}
+                <div className="md:hidden flex items-center gap-3 mb-2 ml-16">
+                  <span className="text-lg">{item.type === 'education' ? '🎓' : item.type === 'work' ? '💼' : item.type === 'project' ? '💻' : '🏆'}</span>
+                  <span className="text-purple-400 font-semibold text-sm">{item.year}</span>
                 </div>
 
                 {/* Content Card */}
                 <motion.div
                   className={`glass-strong rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 ml-16 md:ml-0 ${
-                    index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
-                  } md:w-5/12 w-full group hover:glow-purple`}
-                  whileHover={{ scale: 1.02, y: -5 }}
+                    index % 2 === 0 ? 'md:mr-16' : 'md:ml-16'
+                  } md:w-5/12 w-full group hover:glow-purple min-h-[280px]`}
+                  whileHover={{ scale: 1.02, y: -8 }}
                 >
-                  {/* Year Badge - Desktop */}
-                  <div className="hidden md:block absolute top-6 left-1/2 transform -translate-x-1/2">
-                    <motion.div
-                      className={`w-16 h-16 rounded-full border-4 ${getMarkerColor(item.type)} flex items-center justify-center text-white font-bold shadow-lg`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      {getIcon(item.type)}
-                    </motion.div>
+                  {/* Date Badge - Desktop */}
+                  <div className="hidden md:flex items-center gap-3 mb-4 justify-center">
+                    <span className="text-2xl">{item.type === 'education' ? '🎓' : item.type === 'work' ? '💼' : item.type === 'project' ? '💻' : '🏆'}</span>
+                    <span className="text-purple-400 font-bold text-lg">{item.year}</span>
                   </div>
 
                   <div className="space-y-4">

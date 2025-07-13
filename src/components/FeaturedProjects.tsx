@@ -92,7 +92,7 @@ const FeaturedProjects = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
